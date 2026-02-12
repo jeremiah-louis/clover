@@ -32,7 +32,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between gap-2 rounded-[10px] border border-input bg-background px-3 py-2 text-start text-sm text-foreground shadow-sm focus:border-ring focus:outline-none focus:ring-[3px] focus:ring-ring/20 disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground/70 [&>span]:min-w-0",
+      "flex h-9 w-full items-center justify-between gap-2 rounded-[10px] border border-input bg-background px-3 py-2 text-start text-sm text-foreground shadow-sm focus:border-ring focus:outline-none focus:ring-[3px] focus:ring-ring/20 disabled:cursor-not-allowed disabled:opacity-50 data-placeholder:text-muted-foreground/70 [&>span]:min-w-0",
       className,
     )}
     {...props}
@@ -57,7 +57,7 @@ const SelectScrollUpButton = React.forwardRef<
   <SelectPrimitive.ScrollUpButton
     ref={ref}
     className={cn(
-      "absolute top-0 left-0 right-0 z-10 flex cursor-default items-center justify-center h-6 bg-gradient-to-b from-popover via-popover/80 to-transparent animate-in fade-in-0 duration-150",
+      "absolute top-0 left-0 right-0 z-10 flex cursor-default items-center justify-center h-6 bg-linear-to-b from-popover via-popover/80 to-transparent animate-in fade-in-0 duration-150",
       className,
     )}
     {...props}
@@ -79,7 +79,7 @@ const SelectScrollDownButton = React.forwardRef<
   <SelectPrimitive.ScrollDownButton
     ref={ref}
     className={cn(
-      "absolute bottom-0 left-0 right-0 z-10 flex cursor-default items-center justify-center h-6 bg-gradient-to-t from-popover via-popover/80 to-transparent animate-in fade-in-0 duration-150",
+      "absolute bottom-0 left-0 right-0 z-10 flex cursor-default items-center justify-center h-6 bg-linear-to-t from-popover via-popover/80 to-transparent animate-in fade-in-0 duration-150",
       className,
     )}
     {...props}
@@ -109,7 +109,7 @@ const SelectContent = React.forwardRef<
         overlaySlideIn,
         "dark relative",
         position === "popper" &&
-          "min-w-[var(--radix-select-trigger-width)] data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          "min-w-(--radix-select-trigger-width) data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
         className,
       )}
       position={position}
@@ -119,7 +119,7 @@ const SelectContent = React.forwardRef<
       <SelectPrimitive.Viewport
         className={cn(
           "py-1 max-h-[inherit] overflow-y-auto",
-          position === "popper" && "h-[var(--radix-select-trigger-height)]",
+          position === "popper" && "h-(--radix-select-trigger-height)",
         )}
       >
         {children}

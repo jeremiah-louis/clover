@@ -245,7 +245,7 @@ export function ResizableBottomPanel({
               duration: isResizing ? 0 : 0,
               ease: [0.4, 0, 0.2, 1],
             }}
-            className={`relative flex-shrink-0 ${className}`}
+            className={`relative shrink-0 ${className}`}
             style={{ minHeight, overflow: "hidden", ...style }}
           >
             {/* Extended hover area */}

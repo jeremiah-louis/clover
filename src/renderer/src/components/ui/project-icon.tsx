@@ -8,7 +8,7 @@ interface ProjectIconProps {
 export function ProjectIcon({ className }: ProjectIconProps) {
   return (
     <FolderOpen
-      className={cn("text-muted-foreground flex-shrink-0", className)}
+      className={cn("text-muted-foreground shrink-0", className)}
     />
   )
 }

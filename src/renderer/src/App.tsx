@@ -3,12 +3,21 @@ import { BillingMethodPage } from "./features/onboarding/billing-method-page";
 import { AnthropicOnboardingPage } from "./features/onboarding/anthropic-onboarding-page";
 import { ApiKeyOnboardingPage } from "./features/onboarding/api-key-onboarding-page";
 import { SelectDirectoryPage } from "./features/onboarding/select-directory-page";
+import { ChatPage } from "./features/chat";
 import { Toaster } from "sonner";
+
+// Set to true to show the chat demo page
+const SHOW_DEMO = true;
 
 type OnboardingStep = "billing" | "anthropic-auth" | "api-key" | "select-directory" | "done";
 
 const App = () => {
   const [step, setStep] = useState<OnboardingStep>("billing");
+
+  if (SHOW_DEMO) {
+    return <ChatPage />;
+  }
+
   return (
     <>
       <Toaster richColors />

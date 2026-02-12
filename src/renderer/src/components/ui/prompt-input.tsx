@@ -113,7 +113,7 @@ const PromptInputTextareaInner = (
   }: PromptInputTextareaProps,
   forwardedRef: React.Ref<HTMLTextAreaElement>,
 ) => {
-  const { value, setValue, maxHeight, onSubmit, disabled } = usePromptInput()
+  const { value, setValue, maxHeight, onSubmit, disabled, isLoading } = usePromptInput()
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   // Expose internal ref
@@ -150,7 +150,9 @@ const PromptInputTextareaInner = (
     // Prevent submission during IME composition (e.g., Chinese/Japanese/Korean input)
     if (e.key === "Enter" && !e.shiftKey && !e.metaKey && !e.ctrlKey && !e.nativeEvent.isComposing) {
       e.preventDefault()
-      onSubmit?.()
+      if (!isLoading) {
+        onSubmit?.()
+      }
     }
     onKeyDown?.(e)
   }
@@ -252,7 +254,7 @@ function PromptInputVariantContext() {
           viewBox="0 0 10 10"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="flex-shrink-0"
+          className="shrink-0"
         >
           <path
             d="M5.58953 0.937438C5.26408 0.612 4.73645 0.612 4.41099 0.937438L3.54193 1.80652C3.21649 2.13195 3.21649 2.65959 3.54193 2.98502L4.41099 3.8541C4.73645 4.17954 5.26408 4.17954 5.58953 3.8541L6.45862 2.98502C6.78403 2.65959 6.78403 2.13195 6.45858 1.80652L5.58953 0.937438Z"
