@@ -1,4 +1,4 @@
-# Clover — AI-agent for Hardware Simulation
+# Clover: AI-agent for Hardware Simulation
 <img width="3780" height="1890" alt="Image" src="https://github.com/user-attachments/assets/fd60cddc-539c-4624-b63d-0f89f1b1527d" />
 
 
