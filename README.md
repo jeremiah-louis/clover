@@ -1,18 +1,16 @@
-# Clover — AI-Powered Arduino Simulator
+# Clover — AI-agent for Hardware Simulation
 <img width="3780" height="1890" alt="Image" src="https://github.com/user-attachments/assets/fd60cddc-539c-4624-b63d-0f89f1b1527d" />
+
+
 > Describe what you want to build in plain English. Get working, simulated Arduino hardware in seconds.
 
 Clover is a desktop application that bridges the gap between natural language and working hardware. Users describe Arduino projects conversationally, and an AI agent generates the code, designs the circuit, compiles the firmware, and runs everything in a visual simulator — no physical components required.
 
 Built with Electron, React, and Claude AI (Anthropic), powered by [avr8js](https://github.com/nicschumann/avr8js) for cycle-accurate AVR simulation and [Wokwi Elements](https://github.com/nicschumann/wokwi-elements) for circuit visualization.
 
----
-
 ## Problem Statement
 
 Getting started with hardware and electronics is unnecessarily complex. Beginners and even junior engineers face steep barriers such as understanding circuit design, configuring microcontrollers, writing correct firmware, and setting up physical components before they can see any working result. This complexity leads to a high drop-off rate among people interested in hardware, slowing learning, experimentation, and innovation. There is currently no simple, unified tool that translates high-level intent into working, testable hardware systems while also guiding users through both simulation and real-world setup.
-
----
 
 ## Features
 
@@ -42,15 +40,11 @@ Getting started with hardware and electronics is unnecessarily complex. Beginner
 | 7-Segment Display | `wokwi-7segment` | Multi-digit numeric display |
 | Resistor | `wokwi-resistor` | Visual representation |
 
----
-
 ## Prerequisites
 
 - **Node.js** 18 or higher
 - **npm** (comes with Node.js)
 - **Anthropic API Key** — Get one at [console.anthropic.com](https://console.anthropic.com/)
-
----
 
 ## Getting Started
 
@@ -89,8 +83,6 @@ Type a description of what you want to build in the chat panel:
 
 The AI will generate the Arduino code and circuit layout, compile it, and start the simulation automatically.
 
----
-
 ## Scripts
 
 | Command | Description |
@@ -107,8 +99,6 @@ The AI will generate the Arduino code and circuit layout, compile it, and start 
 | `npm run typecheck:web` | Type-check renderer process only |
 | `npm test` | Run unit tests with Vitest |
 | `npm run coverage` | Run tests with coverage report |
-
----
 
 ## Systems Architecture
 
@@ -147,8 +137,6 @@ CREATE TABLE messages (
     FOREIGN KEY (conversation_id) REFERENCES conversations(id) ON DELETE CASCADE
 );
 ```
-
----
 
 ## Project Structure
 
@@ -191,8 +179,6 @@ open-claude/
 └── package.json
 ```
 
----
-
 ## Tech Stack
 
 | Layer | Technology |
@@ -208,8 +194,6 @@ open-claude/
 | Build Tooling | Vite, electron-vite, electron-builder |
 | Testing | Vitest, Testing Library |
 | Markdown | Remark, Shiki, Mermaid |
-
----
 
 ## Usage Examples
 
@@ -231,8 +215,6 @@ open-claude/
 **Learning & Explanation**
 > "Explain how PWM works on the Arduino and show me an example with a fading LED"
 
----
-
 ## Configuration
 
 ### API Key
@@ -250,8 +232,6 @@ Arduino code is compiled using the [Hexi cloud compiler](https://hexi.wokwi.com)
 | API Key | OS Keychain / Credential Manager | Encrypted via Electron `safeStorage` |
 | Chat History | `~/.config/open-claude/chat-history.db` | SQLite (WAL mode) |
 | EEPROM Data | Browser localStorage | Key-value pairs |
-
----
 
 ## Building for Distribution
 
@@ -273,8 +253,6 @@ npm run build:linux
 ```
 Produces AppImage, Snap, and DEB packages in the `dist/` directory.
 
----
-
 ## Contributing
 
 1. Fork the repository
@@ -284,8 +262,6 @@ Produces AppImage, Snap, and DEB packages in the `dist/` directory.
 5. Run type checking (`npm run typecheck`)
 6. Commit and push
 7. Open a pull request
-
----
 
 ## License
 
