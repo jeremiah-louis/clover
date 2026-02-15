@@ -30,6 +30,8 @@ const PROMPT_SUGGESTIONS = [
   },
 ]
 
+const GRID_SQUARES: [number, number] = [80, 80]
+
 function getGreeting(): string {
   const hour = new Date().getHours()
   if (hour >= 5 && hour < 12) return "Good morning"
@@ -68,7 +70,7 @@ export function ChatLanding({
       <InteractiveGridPattern
         width={20}
         height={20}
-        squares={[80, 80]}
+        squares={GRID_SQUARES}
         className="[mask-image:linear-gradient(to_top,white_20%,transparent_55%)]"
       />
       {/* Greeting */}

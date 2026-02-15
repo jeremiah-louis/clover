@@ -16,7 +16,7 @@ const FIRE_COLORS = [
   "217,119,6", "252,211,77", "234,179,8", "250,204,21",
 ]
 
-export function InteractiveGridPattern({
+export const InteractiveGridPattern = React.memo(function InteractiveGridPattern({
   width = 20,
   height = 20,
   squares = [80, 80],
@@ -122,4 +122,4 @@ export function InteractiveGridPattern({
       })}
     </svg>
   )
-}
+})
