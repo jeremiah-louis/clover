@@ -10,7 +10,7 @@ Built with Electron, React, and Claude AI (Anthropic), powered by [avr8js](https
 
 ## Demo
 <p align='center'>
-    <img src="./resources/agent.gif" alt="Clover demo — describing a project and seeing it simulated" width="100%" />
+    <img src="./resources/agent.gif" alt="Clover demo — describing a project and seeing it simulated" width="3780" />
 </p>
 
 
