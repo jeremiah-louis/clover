@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { Monitor, Flame, Grid3x3, Sparkles } from "lucide-react"
 import { Logo } from "@/components/ui/logo"
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern"
@@ -40,6 +41,17 @@ function getGreeting(): string {
   return "Good night"
 }
 
+function getUserName(): string {
+  try {
+    const raw = localStorage.getItem("user-profile")
+    if (raw) {
+      const profile = JSON.parse(raw)
+      if (profile.name?.trim()) return profile.name.trim()
+    }
+  } catch {}
+  return ""
+}
+
 interface ChatLandingProps {
   value: string
   onValueChange: (value: string) => void
@@ -65,6 +77,9 @@ export function ChatLanding({
   pipelinePhase,
   debugAttempt,
 }: ChatLandingProps) {
+  const userName = useMemo(() => getUserName(), [])
+  const greeting = userName ? `${getGreeting()}, ${userName}` : getGreeting()
+
   return (
     <div className="relative flex-1 flex flex-col items-center justify-center px-6 pb-16 overflow-hidden">
       <InteractiveGridPattern
@@ -76,7 +91,7 @@ export function ChatLanding({
       {/* Greeting */}
       <div className="relative z-10 mb-8 flex items-center gap-3 text-3xl font-serif italic font-medium text-foreground tracking-tight">
         <Logo className="w-8 h-8 shrink-0" fill="currentColor" animate={false} />
-        <span>{getGreeting()}, Jeremiah</span>
+        <span>{greeting}</span>
       </div>
 
       {/* Centered chat input */}
