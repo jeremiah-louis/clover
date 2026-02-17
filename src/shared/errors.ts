@@ -5,6 +5,7 @@ export enum ErrorCategory {
   CLIENT = "CLIENT",
   FILE_SYSTEM = "FILE_SYSTEM",
   CLAUDE_API = "CLAUDE_API",
+  PCB_API = "PCB_API",
 }
 
 // ---------------------------------------------------------------------------
@@ -12,6 +13,7 @@ export enum ErrorCategory {
 //   CLIENT      1xxx
 //   FILE_SYSTEM 2xxx
 //   CLAUDE_API  3xxx
+//   PCB_API     4xxx
 // ---------------------------------------------------------------------------
 export enum ErrorCode {
   // Client
@@ -34,6 +36,13 @@ export enum ErrorCode {
   API_OVERLOADED = 3004,
   API_NETWORK = 3005,
   API_MAX_TOKENS = 3006,
+
+  // PCB API
+  PCB_UNKNOWN = 4000,
+  PCB_INVALID_SPECS = 4001,
+  PCB_QUOTE_FAILED = 4002,
+  PCB_GERBER_GENERATION_FAILED = 4003,
+  PCB_ORDER_FAILED = 4004,
 }
 
 // ---------------------------------------------------------------------------
@@ -89,7 +98,12 @@ export class AppError extends Error {
 // ---------------------------------------------------------------------------
 
 export class FileSystemError extends AppError {
-  constructor(message: string, code: ErrorCode, path: string, options?: { cause?: unknown }) {
+  constructor(
+    message: string,
+    code: ErrorCode,
+    path: string,
+    options?: { cause?: unknown },
+  ) {
     super(message, code, ErrorCategory.FILE_SYSTEM, path, options);
     this.name = "FileSystemError";
   }
@@ -120,14 +134,24 @@ export class FileSystemError extends AppError {
 }
 
 export class ClientError extends AppError {
-  constructor(message: string, code: ErrorCode, path: string, options?: { cause?: unknown }) {
+  constructor(
+    message: string,
+    code: ErrorCode,
+    path: string,
+    options?: { cause?: unknown },
+  ) {
     super(message, code, ErrorCategory.CLIENT, path, options);
     this.name = "ClientError";
   }
 }
 
 export class ClaudeApiError extends AppError {
-  constructor(message: string, code: ErrorCode, path: string, options?: { cause?: unknown }) {
+  constructor(
+    message: string,
+    code: ErrorCode,
+    path: string,
+    options?: { cause?: unknown },
+  ) {
     super(message, code, ErrorCategory.CLAUDE_API, path, options);
     this.name = "ClaudeApiError";
   }
@@ -138,9 +162,14 @@ export class ClaudeApiError extends AppError {
    */
   static from(error: unknown, path: string): ClaudeApiError {
     // Anthropic SDK errors expose a `status` property and nested error body
-    const raw = error as { status?: number; message?: string; error?: { error?: { message?: string } } };
+    const raw = error as {
+      status?: number;
+      message?: string;
+      error?: { error?: { message?: string } };
+    };
     // Prefer the nested human-readable message from the API response body
-    const message = raw?.error?.error?.message ?? raw?.message ?? "Unknown Claude API error";
+    const message =
+      raw?.error?.error?.message ?? raw?.message ?? "Unknown Claude API error";
 
     let code: ErrorCode;
     switch (raw?.status) {
@@ -158,5 +187,25 @@ export class ClaudeApiError extends AppError {
     }
 
     return new ClaudeApiError(message, code, path, { cause: error });
+  }
+}
+
+export class PcbApiError extends AppError {
+  constructor(
+    message: string,
+    code: ErrorCode,
+    path: string,
+    options?: { cause?: unknown },
+  ) {
+    super(message, code, ErrorCategory.PCB_API, path, options);
+    this.name = "PcbApiError";
+  }
+
+  static from(error: unknown, path: string): PcbApiError {
+    const raw = error as { message?: string };
+    const message = raw?.message ?? "Unknown PCB API error";
+    return new PcbApiError(message, ErrorCode.PCB_UNKNOWN, path, {
+      cause: error,
+    });
   }
 }

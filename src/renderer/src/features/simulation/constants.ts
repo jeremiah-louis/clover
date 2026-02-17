@@ -37,7 +37,7 @@ The diagram JSON must follow this exact format:
 {
   "version": 1,
   "author": "Arduino Assistant",
-  "editor": "open-claude",
+  "editor": "clover",
   "parts": [
     {
       "type": "<wokwi-element-type>",
@@ -91,7 +91,7 @@ void loop() {
 {
   "version": 1,
   "author": "Arduino Assistant",
-  "editor": "open-claude",
+  "editor": "clover",
   "parts": [
     { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0 },
     { "type": "wokwi-led", "id": "led1", "top": -80, "left": 150, "attrs": { "color": "red", "pin": "13" } }
@@ -121,12 +121,87 @@ When the user asks you to **explain** a concept, how something works, or request
 - Give each part a unique, descriptive ID
 - Position parts so they don't overlap (use negative top values for parts above the board)
 - The \`"version": 1\` field is REQUIRED in the diagram JSON
-- When fixing compile errors, output ONLY the corrected code block`
+- When fixing compile errors, output ONLY the corrected code block
+
+## Custom PCB Design
+
+When the user asks to create a custom PCB, design a PCB board, or mentions ordering/manufacturing a board:
+
+1. Provide a text explanation of the PCB design
+2. Output the Arduino code block as usual
+3. Output the circuit diagram JSON as usual
+4. Output a PCB design specification block using a \`\`\`pcb fence
+
+The PCB design JSON must follow this format:
+
+\`\`\`
+{
+  "name": "Project Name PCB",
+  "description": "Brief description of the board",
+  "specs": {
+    "layers": 2,
+    "width": 50,
+    "height": 40,
+    "quantity": 5,
+    "color": "green",
+    "finish": "hasl",
+    "thickness": 1.6,
+    "copperWeight": "1oz",
+    "castellatedHoles": false,
+    "impedanceControl": false,
+    "stencil": false
+  },
+  "components": [
+    {
+      "designator": "U1",
+      "package": "DIP-28",
+      "value": "ATmega328P",
+      "description": "Main microcontroller",
+      "x": 25,
+      "y": 20,
+      "rotation": 0,
+      "layer": "top"
+    }
+  ],
+  "traces": [
+    {
+      "net": "VCC",
+      "width": 0.5,
+      "points": [{"x": 10, "y": 10}, {"x": 25, "y": 10}],
+      "layer": "top"
+    }
+  ],
+  "boardOutline": [
+    {"x": 0, "y": 0}, {"x": 50, "y": 0}, {"x": 50, "y": 40}, {"x": 0, "y": 40}
+  ],
+  "drillHoles": [
+    {"x": 5, "y": 5, "diameter": 0.8}
+  ],
+  "mountingHoles": [
+    {"x": 3, "y": 3, "diameter": 3.2},
+    {"x": 47, "y": 3, "diameter": 3.2},
+    {"x": 3, "y": 37, "diameter": 3.2},
+    {"x": 47, "y": 37, "diameter": 3.2}
+  ]
+}
+\`\`\`
+
+### PCB Design Guidelines
+
+- Map each component from the circuit to a PCB component with appropriate SMD or through-hole package
+- Use standard package sizes: 0805 for resistors/capacitors, SOT-23 for small transistors, DIP-28 for ATmega328P
+- Board dimensions should be compact but realistic (minimum 20x20mm, typically 50-100mm per side)
+- Always include 4 mounting holes at the corners (3.2mm diameter, 3mm from edges)
+- Place components with adequate spacing (minimum 1mm between pads)
+- Route power traces wider (0.5mm) than signal traces (0.25mm)
+- Board outline should be a simple rectangle unless the user specifies otherwise
+- Specs: layers, color, finish, thickness, etc. — default to the values shown unless the user specifies otherwise
+- Include ALL components from the circuit diagram in the PCB component list`;
 
 export const DEFAULT_LED_DIAGRAM = JSON.stringify({
   version: 1,
   author: "Arduino Assistant",
-  editor: "open-claude",
+  editor: "clover",
   parts: [
     { type: "wokwi-arduino-uno", id: "uno", top: 0, left: 0 },
     {
@@ -141,4 +216,4 @@ export const DEFAULT_LED_DIAGRAM = JSON.stringify({
     ["uno:13", "led1:A", "green", []],
     ["uno:GND.1", "led1:C", "black", []],
   ],
-})
+});

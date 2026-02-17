@@ -1,0 +1,14 @@
+<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024">
+  <defs>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <g transform="rotate(-45, 100, 100)">
+    <path d="M100,100 C62,72 48,28 75,10 C88,0 98,12 100,26 C102,12 112,0 125,10 C152,28 138,72 100,100Z" fill="url(#leafGrad)"/>
+    <path d="M100,100 C62,72 48,28 75,10 C88,0 98,12 100,26 C102,12 112,0 125,10 C152,28 138,72 100,100Z" fill="url(#leafGrad)" transform="rotate(90, 100, 100)"/>
+    <path d="M100,100 C62,72 48,28 75,10 C88,0 98,12 100,26 C102,12 112,0 125,10 C152,28 138,72 100,100Z" fill="url(#leafGrad)" transform="rotate(180, 100, 100)"/>
+    <path d="M100,100 C62,72 48,28 75,10 C88,0 98,12 100,26 C102,12 112,0 125,10 C152,28 138,72 100,100Z" fill="url(#leafGrad)" transform="rotate(270, 100, 100)"/>
+  </g>
+</svg>
