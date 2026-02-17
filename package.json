@@ -1,7 +1,7 @@
 {
-  "name": "open-claude",
+  "name": "clover",
   "version": "0.0.0",
-  "description": "An Electron template with React, TypeScript, and Shadcn UI",
+  "description": "AI-agent for Hardware Simulation",
   "main": "./out/main/index.js",
   "author": "Author",
   "homepage": "https://electron-vite.org",
@@ -12,7 +12,7 @@
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
     "build": "npm run typecheck && electron-vite build",
-    "postinstall": "bun x patch-package && electron-builder install-app-deps",
+    "postinstall": "bun x patch-package && electron-builder install-app-deps && plutil -replace CFBundleName -string Clover node_modules/electron/dist/Electron.app/Contents/Info.plist && plutil -replace CFBundleDisplayName -string Clover node_modules/electron/dist/Electron.app/Contents/Info.plist",
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
     "build:mac": "electron-vite build && electron-builder --mac",

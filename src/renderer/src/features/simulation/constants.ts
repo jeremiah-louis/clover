@@ -37,7 +37,7 @@ The diagram JSON must follow this exact format:
 {
   "version": 1,
   "author": "Arduino Assistant",
-  "editor": "open-claude",
+  "editor": "clover",
   "parts": [
     {
       "type": "<wokwi-element-type>",
@@ -91,7 +91,7 @@ void loop() {
 {
   "version": 1,
   "author": "Arduino Assistant",
-  "editor": "open-claude",
+  "editor": "clover",
   "parts": [
     { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0 },
     { "type": "wokwi-led", "id": "led1", "top": -80, "left": 150, "attrs": { "color": "red", "pin": "13" } }
@@ -201,7 +201,7 @@ The PCB design JSON must follow this format:
 export const DEFAULT_LED_DIAGRAM = JSON.stringify({
   version: 1,
   author: "Arduino Assistant",
-  editor: "open-claude",
+  editor: "clover",
   parts: [
     { type: "wokwi-arduino-uno", id: "uno", top: 0, left: 0 },
     {

@@ -2,17 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title></title>
+    <title>Clover</title>
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://hexi.wokwi.com; worker-src 'self' blob:"
     />
     <script>
       (function () {
-        var stored = localStorage.getItem("theme")
+        var stored = localStorage.getItem("theme");
         var prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches
+          "(prefers-color-scheme: dark)",
+        ).matches;
         var theme =
           stored === "light"
             ? "light"
@@ -20,9 +20,9 @@
               ? "dark"
               : prefersDark
                 ? "dark"
-                : "light"
-        document.documentElement.classList.add(theme)
-      })()
+                : "light";
+        document.documentElement.classList.add(theme);
+      })();
     </script>
     <style>
       :root {

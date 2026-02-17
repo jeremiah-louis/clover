@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain } from "electron";
+import { app, shell, BrowserWindow, ipcMain, nativeImage } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import { getVersions, triggerIPC } from "@/lib";
@@ -6,12 +6,17 @@ import { GetVersionsFn } from "@shared/types";
 import { registerIpcHandlers } from "./ipc";
 import { initDatabase } from "./services/database";
 
+const appIcon = nativeImage.createFromPath(
+  join(__dirname, "../../build/icon.png"),
+);
+
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     show: false,
+    icon: appIcon,
     autoHideMenuBar: true,
     vibrancy: "under-window",
     titleBarStyle: process.platform === "darwin" ? "hiddenInset" : "default",
@@ -46,7 +51,13 @@ function createWindow(): void {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId("com.electron");
+  electronApp.setAppUserModelId("com.clover.app");
+
+  if (process.platform === "darwin" && app.dock && !appIcon.isEmpty()) {
+    app.dock.setIcon(appIcon);
+  }
+
+  app.setName("Clover");
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
