@@ -15,7 +15,7 @@ function createWindow(): void {
     autoHideMenuBar: true,
     vibrancy: "under-window",
     titleBarStyle: process.platform === "darwin" ? "hiddenInset" : "default",
-    trafficLightPosition: { x: 16, y: 16 },
+    trafficLightPosition: { x: 13, y: 12 },
     webPreferences: {
       preload: join(__dirname, "../preload/index.js"),
       sandbox: true,
@@ -67,9 +67,8 @@ app.whenReady().then(() => {
   });
 
   // IPC events
-  ipcMain.handle(
-    "getVersions",
-    (_, ...args: Parameters<GetVersionsFn>) => getVersions(...args)
+  ipcMain.handle("getVersions", (_, ...args: Parameters<GetVersionsFn>) =>
+    getVersions(...args),
   );
 
   ipcMain.handle("triggerIPC", () => triggerIPC());

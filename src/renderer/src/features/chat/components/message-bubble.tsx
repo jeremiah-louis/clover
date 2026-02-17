@@ -1,11 +1,14 @@
-import { memo } from "react"
-import { ChatMarkdownRenderer, MemoizedMarkdown } from "@/components/chat-markdown"
-import type { ChatMessage } from "../types"
+import { memo } from "react";
+import {
+  ChatMarkdownRenderer,
+  MemoizedMarkdown,
+} from "@/components/chat-markdown";
+import type { ChatMessage } from "../types";
 
 interface MessageBubbleProps {
-  message: ChatMessage
-  streamingContent?: string
-  isStreaming?: boolean
+  message: ChatMessage;
+  streamingContent?: string;
+  isStreaming?: boolean;
 }
 
 export const MessageBubble = memo(function MessageBubble({
@@ -20,13 +23,13 @@ export const MessageBubble = memo(function MessageBubble({
           {message.content}
         </div>
       </div>
-    )
+    );
   }
 
   // Assistant message
-  const content = isStreaming ? (streamingContent ?? "") : message.content
+  const content = isStreaming ? (streamingContent ?? "") : message.content;
 
-  if (!content && !isStreaming) return null
+  if (!content && !isStreaming) return null;
 
   return (
     <div className="px-1">
@@ -40,5 +43,5 @@ export const MessageBubble = memo(function MessageBubble({
         <MemoizedMarkdown content={content} id={message.id} size="md" />
       )}
     </div>
-  )
-})
+  );
+});
